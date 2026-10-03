@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>JSON Lens · 结构化编辑器</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="viewer.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="viewer.html" aria-label="JSON Lens 首页"><span class="brand-mark" aria-hidden="true">{<i>j</i>}</span><span>JSON Lens<small>看清数据的每一层</small></span></a>
+      <div class="header-actions"><span class="local-badge"><span></span> 本地格式化</span><button id="openStandalone" class="quiet" hidden>独立窗口</button><button id="settings" class="quiet">接口设置 <span aria-hidden="true">↗</span></button></div>
+    </header>
+    <main>
+      <section class="intro"><div><div class="eyebrow">JSON WORKSPACE</div><h1>从文本，到结构。</h1><p id="subtitle">粘贴 JSON 即可查看；从日志中提取，交给 AI。</p></div><div class="intro-note">保留大数字<span>保留字段顺序</span><span>保留重复字段</span></div></section>
+      <div class="workspace-toolbar">
+        <div class="toolbar-group"><button id="format" class="primary">格式化 <kbd>⌘ ↵</kbd></button><button id="minify">压缩</button><span class="toolbar-divider"></span><button id="copy" disabled>复制 JSON</button><button id="download" disabled>下载</button></div>
+        <div class="toolbar-group"><button id="clear" class="quiet">清空</button><button id="ai" class="ai-button"><span aria-hidden="true">✧</span> AI 提取 JSON</button><button id="cancel" class="danger" hidden>取消请求</button></div>
+      </div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="resultsBar" class="results-bar" hidden><label for="resultSelect">提取结果</label><select id="resultSelect"></select><button id="original" class="quiet">查看原始文本</button><span>仅保留本次查看的内容</span></div>
+      <div class="editor-grid">
+        <section class="panel source-panel" aria-labelledby="sourceTitle">
+          <div class="panel-header"><h2 id="sourceTitle"><span class="panel-dot"></span> 原始 / 编辑</h2><span id="sourceSize" class="mono muted">0 B</span></div>
+          <div class="source-wrap"><textarea id="source" aria-label="JSON 源码或待提取文本" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="在这里粘贴 JSON、接口响应或日志…"></textarea><div id="sourceEmpty" class="source-empty"><span class="empty-braces" aria-hidden="true">{ }</span><p>数据从这里开始</p><span>粘贴文本，或先试一份示例。</span><button id="sample">载入示例 <span aria-hidden="true">↗</span></button></div></div>
+          <div class="panel-footer"><span id="editorStatus">等待输入</span><span>UTF-8 · 2 空格</span></div>
+        </section>
+        <section class="panel tree-panel" aria-labelledby="treeTitle">
+          <div class="panel-header"><h2 id="treeTitle"><span class="panel-dot accent"></span> 结构视图</h2><div class="small-actions"><button id="expand" class="quiet" disabled>展开</button><button id="collapse" class="quiet" disabled>折叠</button></div></div>
+          <div class="tree-tools"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" aria-label="搜索 JSON 字段或值" placeholder="搜索字段或值"><kbd>⌘ K</kbd></label><span id="searchCount" class="muted"></span></div>
+          <div id="tree" class="tree-scroll" role="tree" aria-label="JSON 结构树"><div class="tree-placeholder"><span aria-hidden="true">⌘</span><h3>复杂结构，一目了然</h3><p>字段、类型、层级与路径<br>会在这里清晰展开。</p></div></div>
+          <div class="panel-footer path-footer"><code id="path">$</code><button id="copyPath" class="quiet" disabled>复制路径</button></div>
+        </section>
+      </div>
+      <footer class="workspace-footer"><span id="documentStats">JSON 标准格式 · 本地最多 5 MB</span><span>仅点击 AI 提取时发送文本 · AI 最多 100 KB</span></footer>
+    </main>
+    <div id="toast" class="toast" role="status" hidden></div>
+  </div>
+</body>
+</html>

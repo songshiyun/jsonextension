@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>接口设置 · JSON Lens</title><link rel="stylesheet" href="style.css"><script type="module" src="options.js"></script></head>
+<body>
+  <header class="app-header"><a class="brand" href="viewer.html"><span class="brand-mark" aria-hidden="true">{<i>j</i>}</span><span>JSON Lens<small>看清数据的每一层</small></span></a><a class="settings-back" href="viewer.html">返回编辑器 ↗</a></header>
+  <main class="settings-main"><div class="eyebrow">CONNECT YOUR MODEL</div><h1>让日志里的 JSON，显露出来。</h1><p>连接 OpenAI 兼容接口。普通查看与格式化，无需配置模型。</p>
+    <form id="settingsForm" class="settings-card">
+      <div class="field"><label for="baseUrl">Base URL</label><input id="baseUrl" type="url" required placeholder="https://api.example.com/v1" autocomplete="off"><small>填写接口根地址，例如 /v1；也支持完整的 /chat/completions 地址。</small></div>
+      <div class="field"><label for="apiKey">API Key</label><div class="key-input"><input id="apiKey" type="password" placeholder="填写你的 API Key" autocomplete="off"><button id="showKey" type="button" aria-pressed="false">显示</button></div><small>使用无需密钥的本地兼容服务时可以留空。</small></div>
+      <div class="field"><label for="model">模型名称</label><input id="model" required placeholder="填写服务商提供的模型 ID" autocomplete="off"><small>必须与接口支持的模型名称一致。</small></div>
+      <div class="settings-actions"><button id="save" class="primary" type="submit">保存配置</button><button id="test" type="button">测试连接</button><button id="cancelTest" class="danger" type="button" hidden>取消</button><button id="clearSettings" class="quiet" type="button">清除配置</button></div>
+      <div id="settingsNotice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div class="privacy-note">配置只保存在本机，不会同步。API Key 以未加密形式存储，网页脚本无法读取。<br>仅点击「AI 提取 JSON」或右键同名菜单时，选中的文本才会发给此接口。<br>「测试连接」发送一小段示例 JSON，可能产生少量调用费用。不保存原文或结果历史。</div>
+    </form>
+  </main>
+</body></html>
